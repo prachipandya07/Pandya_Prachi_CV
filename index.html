@@ -1216,11 +1216,16 @@
                 item.className = 'portfolio-item';
                 item.setAttribute('data-category', image.category);
                 
+                const companyName =
+                    image.category === 'infilux'
+                        ? 'Infilux AppSec Project'
+                        : 'Artrivedi Project';
+                
                 item.innerHTML = `
                     <img src="${image.url}" alt="${image.name}" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>${image.name.replace(/\.[^/.]+$/, '').replace(/-|_/g, ' ')}</h3>
-                        <p>Infilux AppSec Project</p>
+                        <p>${companyName}</p>
                     </div>
                 `;
                 
