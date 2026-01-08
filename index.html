@@ -576,6 +576,121 @@
             font-weight: 600;
         }
 
+        /* Image Modal/Lightbox */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: 3px solid var(--neon-pink);
+            box-shadow: 0 0 80px rgba(255, 0, 110, 0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 3rem;
+            color: var(--light);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s;
+            z-index: 2001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--neon-pink);
+            transform: rotate(90deg);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--light);
+            cursor: pointer;
+            background: rgba(255, 0, 110, 0.3);
+            border: 2px solid var(--neon-pink);
+            padding: 1rem 1.5rem;
+            transition: all 0.3s;
+            z-index: 2001;
+            user-select: none;
+        }
+
+        .modal-nav:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .modal-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .modal-info p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         .skills { background: linear-gradient(180deg, #1a0a1a, var(--dark-bg)); }
 
         .skills-grid {
@@ -850,6 +965,20 @@
         </div>
     </section>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal(event)">&times;</button>
+            <div class="modal-nav modal-prev" onclick="navigateModal(-1, event)">‹</div>
+            <img id="modalImage" src="" alt="Portfolio Image">
+            <div class="modal-nav modal-next" onclick="navigateModal(1, event)">›</div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalCategory"></p>
+            </div>
+        </div>
+    </div>
+
     <section class="skills" id="skills">
         <div class="section-header">
             <h2 class="section-title">SKILLS</h2>
@@ -964,6 +1093,7 @@
         let displayedImages = [];
         let currentPage = 1;
         const imagesPerPage = 12;
+        let currentModalIndex = 0;
 
         async function fetchFolderStructure(url, category) {
             try {
@@ -1166,11 +1296,12 @@
             
             grid.innerHTML = '';
             
-            pageImages.forEach(image => {
+            pageImages.forEach((image, index) => {
                 const item = document.createElement('div');
                 item.className = 'portfolio-item';
                 
                 const projectName = image.subfolder || (image.category.charAt(0).toUpperCase() + image.category.slice(1));
+                const actualIndex = startIndex + index;
                 
                 item.innerHTML = `
                     <img src="${image.url}" alt="${image.name}" loading="lazy">
@@ -1180,11 +1311,78 @@
                     </div>
                 `;
                 
+                item.onclick = () => openModal(actualIndex);
+                
                 grid.appendChild(item);
             });
             
             updatePagination();
         }
+
+        function openModal(index) {
+            currentModalIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            
+            const image = displayedImages[index];
+            
+            modalImage.src = image.url;
+            modalTitle.textContent = image.name.replace(/\.[^/.]+$/, '').replace(/-|_/g, ' ');
+            
+            const projectName = image.subfolder || (image.category.charAt(0).toUpperCase() + image.category.slice(1));
+            modalCategory.textContent = projectName;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'imageModal' || event.target.classList.contains('modal-close')) {
+                const modal = document.getElementById('imageModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function navigateModal(direction, event) {
+            event.stopPropagation();
+            
+            currentModalIndex += direction;
+            
+            if (currentModalIndex < 0) {
+                currentModalIndex = displayedImages.length - 1;
+            } else if (currentModalIndex >= displayedImages.length) {
+                currentModalIndex = 0;
+            }
+            
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            
+            const image = displayedImages[currentModalIndex];
+            
+            modalImage.src = image.url;
+            modalTitle.textContent = image.name.replace(/\.[^/.]+$/, '').replace(/-|_/g, ' ');
+            
+            const projectName = image.subfolder || (image.category.charAt(0).toUpperCase() + image.category.slice(1));
+            modalCategory.textContent = projectName;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    navigateModal(-1, e);
+                } else if (e.key === 'ArrowRight') {
+                    navigateModal(1, e);
+                }
+            }
+        });
 
         function updatePagination() {
             const pagination = document.getElementById('pagination');
