@@ -834,6 +834,7 @@
             <button class="filter-btn active" onclick="filterCategory('all')">ALL PROJECTS</button>
             <button class="filter-btn" onclick="filterCategory('infilux')">INFILUX</button>
             <button class="filter-btn" onclick="filterCategory('artrivedi')">ARTRIVEDI</button>
+            <button class="filter-btn" onclick="filterCategory('freelance')">FREELANCE WORK</button>
         </div>
 
         <div id="breadcrumbNav" class="breadcrumb" style="display: none;"></div>
@@ -951,7 +952,8 @@
 
         let portfolioData = {
             infilux: { folders: [], images: [] },
-            artrivedi: { folders: [], images: [] }
+            artrivedi: { folders: [], images: [] },
+            freelance: { folders: [], images: [] }
         };
         
         let currentView = {
@@ -978,7 +980,11 @@
                             name: file.name,
                             url: file.url,
                             imageCount: subImages.length,
-                            images: subImages
+                            images: subImages.map(img => ({
+                                ...img,
+                                category: category,
+                                subfolder: file.name
+                            }))
                         });
                     } else if (file.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)) {
                         images.push({
@@ -1033,8 +1039,14 @@
                     'artrivedi'
                 );
                 
+                const freelanceData = await fetchFolderStructure(
+                    'https://api.github.com/repos/prachipandya07/Pandya_Prachi_CV/contents/Freelance%20work',
+                    'freelance'
+                );
+                
                 portfolioData.infilux = infiluxData;
                 portfolioData.artrivedi = artrivediData;
+                portfolioData.freelance = freelanceData;
                 
                 showMainView('all');
                 
@@ -1053,30 +1065,42 @@
             breadcrumb.style.display = 'none';
             
             if (category === 'all') {
+                // Show all subfolders from all three categories
                 const allFolders = [
                     ...portfolioData.infilux.folders.map(f => ({ ...f, category: 'infilux' })),
-                    ...portfolioData.artrivedi.folders.map(f => ({ ...f, category: 'artrivedi' }))
-                ];
-                const allImages = [
-                    ...portfolioData.infilux.images,
-                    ...portfolioData.artrivedi.images
+                    ...portfolioData.artrivedi.folders.map(f => ({ ...f, category: 'artrivedi' })),
+                    ...portfolioData.freelance.folders.map(f => ({ ...f, category: 'freelance' }))
                 ];
                 
-                if (allFolders.length > 0) {
-                    displaySubfolders(allFolders);
-                } else if (allImages.length > 0) {
-                    displayedImages = allImages;
-                    currentPage = 1;
-                    displayImages();
+                // Also collect root level images (images not in subfolders)
+                const allRootImages = [
+                    ...portfolioData.infilux.images,
+                    ...portfolioData.artrivedi.images,
+                    ...portfolioData.freelance.images
+                ];
+                
+                if (allFolders.length > 0 || allRootImages.length > 0) {
+                    // If there are subfolders, show them
+                    if (allFolders.length > 0) {
+                        displaySubfolders(allFolders);
+                    } else {
+                        // Only root images, no subfolders
+                        displayedImages = allRootImages;
+                        currentPage = 1;
+                        displayImages();
+                    }
                 } else {
                     grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No portfolio items found.</p>';
                 }
             } else {
+                // Single category view (Infilux, Artrivedi, or Freelance)
                 const data = portfolioData[category];
                 
                 if (data.folders.length > 0) {
+                    // Show subfolders if they exist
                     displaySubfolders(data.folders.map(f => ({ ...f, category })));
                 } else if (data.images.length > 0) {
+                    // Show root level images if no subfolders
                     displayedImages = data.images;
                     currentPage = 1;
                     displayImages();
@@ -1121,12 +1145,7 @@
                 <span class="breadcrumb-item breadcrumb-current">${folder.name}</span>
             `;
             
-            displayedImages = folder.images.map(img => ({
-                ...img,
-                category: folder.category,
-                subfolder: folder.name
-            }));
-            
+            displayedImages = folder.images;
             currentPage = 1;
             displayImages();
         }
