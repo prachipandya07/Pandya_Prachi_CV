@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -81,7 +80,6 @@
             50% { transform: translate(-80px, -60px) scale(1.3); }
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -99,11 +97,6 @@
             position: relative;
         }
 
-        .glitch-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
         .hero h1 {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -113,29 +106,7 @@
             background-clip: text;
             letter-spacing: -0.05em;
             animation: fadeInScale 1s ease-out;
-            text-shadow: 0 0 80px rgba(255,0,110,0.5);
             position: relative;
-        }
-
-        .hero h1::before {
-            content: 'PRACHI PANDYA';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glitch1 3s infinite;
-            opacity: 0;
-        }
-
-        @keyframes glitch1 {
-            0%, 90%, 100% { opacity: 0; transform: translate(0); }
-            92% { opacity: 0.8; transform: translate(-3px, 3px); }
-            94% { opacity: 0.8; transform: translate(3px, -3px); }
         }
 
         .hero h2 {
@@ -168,34 +139,16 @@
             padding: 1rem 2rem;
             background: rgba(255,0,110,0.1);
             border: 2px solid var(--neon-pink);
-            border-radius: 0;
             color: var(--light);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s ease;
-        }
-
-        .neon-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,0,110,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .neon-tag:hover::before {
-            left: 100%;
         }
 
         .neon-tag:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 30px var(--neon-pink), inset 0 0 20px rgba(255,0,110,0.2);
+            box-shadow: 0 0 30px var(--neon-pink);
         }
 
         .cta-section {
@@ -213,11 +166,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s;
-            border: none;
-            cursor: pointer;
         }
 
         .neon-btn-primary {
@@ -228,7 +177,7 @@
 
         .neon-btn-primary:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 60px rgba(255,0,110,0.9), 0 0 100px rgba(131,56,236,0.5);
+            box-shadow: 0 0 60px rgba(255,0,110,0.9);
         }
 
         .neon-btn-outline {
@@ -245,28 +194,15 @@
         }
 
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -297,27 +233,10 @@
             transition: all 0.3s;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
-            transition: width 0.3s;
-        }
-
         nav a:hover {
             color: var(--neon-pink);
         }
 
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Section Styling */
         section {
             position: relative;
             z-index: 1;
@@ -337,7 +256,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
-            letter-spacing: -0.03em;
         }
 
         .section-subtitle {
@@ -347,7 +265,6 @@
             letter-spacing: 0.2em;
         }
 
-        /* About Section */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -359,32 +276,11 @@
         .about-card {
             background: rgba(255,255,255,0.02);
             padding: 3rem;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s ease;
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .about-card:hover::before {
-            opacity: 1;
         }
 
         .about-card:hover {
             transform: translateY(-10px);
-            background: rgba(255,255,255,0.05);
             box-shadow: 0 20px 60px rgba(255,0,110,0.3);
         }
 
@@ -403,26 +299,12 @@
             font-size: 1.1rem;
         }
 
-        /* Experience Timeline */
-        .experience {
-            background: linear-gradient(180deg, var(--dark-bg), #1a0a1a);
-        }
+        .experience { background: linear-gradient(180deg, var(--dark-bg), #1a0a1a); }
 
         .timeline {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
-            box-shadow: 0 0 20px var(--neon-pink);
         }
 
         .timeline-item {
@@ -433,40 +315,13 @@
         .timeline-content {
             background: rgba(255,255,255,0.03);
             padding: 3rem;
-            width: calc(50% - 60px);
-            position: relative;
             border: 2px solid rgba(255,0,110,0.3);
             transition: all 0.4s ease;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: auto;
         }
 
         .timeline-content:hover {
             border-color: var(--neon-pink);
             box-shadow: 0 0 40px rgba(255,0,110,0.4);
-            transform: scale(1.02);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            top: 40px;
-            border: 5px solid var(--dark-bg);
-            box-shadow: 0 0 30px var(--neon-pink);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 30px var(--neon-pink); }
-            50% { box-shadow: 0 0 50px var(--neon-pink), 0 0 80px var(--neon-purple); }
         }
 
         .company-name {
@@ -491,7 +346,6 @@
             font-size: 1rem;
             margin-bottom: 2rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
         .responsibilities {
@@ -514,10 +368,7 @@
             font-size: 1.5rem;
         }
 
-        /* Portfolio */
-        .portfolio {
-            background: var(--dark-bg);
-        }
+        .portfolio { background: var(--dark-bg); }
 
         .filter-buttons {
             display: flex;
@@ -537,7 +388,6 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            font-size: 1rem;
         }
 
         .filter-btn:hover, .filter-btn.active {
@@ -545,6 +395,86 @@
             border-color: transparent;
             box-shadow: 0 0 40px rgba(255,0,110,0.6);
             transform: translateY(-3px);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-item {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--neon-pink);
+            border-color: var(--neon-pink);
+        }
+
+        .breadcrumb-separator {
+            color: rgba(255,255,255,0.4);
+            font-size: 1.2rem;
+        }
+
+        .breadcrumb-current {
+            color: var(--light);
+            cursor: default;
+        }
+
+        .subfolder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1800px;
+            margin: 0 auto 4rem;
+        }
+
+        .subfolder-card {
+            background: rgba(255,255,255,0.03);
+            padding: 3rem;
+            text-align: center;
+            border: 3px solid var(--neon-purple);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .subfolder-card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 50px rgba(255,0,110,0.6);
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .subfolder-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .subfolder-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        .subfolder-count {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 1.1rem;
         }
 
         .portfolio-grid {
@@ -561,27 +491,10 @@
             aspect-ratio: 1;
             cursor: pointer;
             background: rgba(255,255,255,0.02);
-            border: 2px solid transparent;
             transition: all 0.5s ease;
         }
 
-        .portfolio-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: 1;
-            mix-blend-mode: overlay;
-        }
-
-        .portfolio-item:hover::before {
-            opacity: 0.3;
-        }
-
         .portfolio-item:hover {
-            border-color: var(--neon-pink);
             box-shadow: 0 20px 60px rgba(255,0,110,0.5);
             transform: translateY(-10px) scale(1.02);
         }
@@ -624,7 +537,6 @@
             color: var(--neon-cyan);
             font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
         .pagination {
@@ -644,7 +556,6 @@
             transition: all 0.3s ease;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
         }
 
         .pagination-btn:hover:not(:disabled) {
@@ -665,10 +576,7 @@
             font-weight: 600;
         }
 
-        /* Skills */
-        .skills {
-            background: linear-gradient(180deg, #1a0a1a, var(--dark-bg));
-        }
+        .skills { background: linear-gradient(180deg, #1a0a1a, var(--dark-bg)); }
 
         .skills-grid {
             display: grid;
@@ -683,24 +591,6 @@
             padding: 3rem;
             border: 2px solid rgba(131,56,236,0.3);
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,0,110,0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .skill-category:hover::before {
-            opacity: 1;
         }
 
         .skill-category:hover {
@@ -730,7 +620,6 @@
             color: var(--light);
             padding: 0.8rem 1.5rem;
             border: 2px solid var(--neon-purple);
-            font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s;
         }
@@ -741,10 +630,7 @@
             transform: translateY(-3px);
         }
 
-        /* Contact */
-        .contact {
-            background: var(--dark-bg);
-        }
+        .contact { background: var(--dark-bg); }
 
         .contact-info {
             display: grid;
@@ -758,27 +644,7 @@
             background: rgba(255,255,255,0.02);
             padding: 3rem;
             text-align: center;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s ease;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .contact-card:hover::before {
-            opacity: 1;
         }
 
         .contact-card:hover {
@@ -812,7 +678,6 @@
             color: var(--neon-cyan);
         }
 
-        /* Footer */
         footer {
             background: var(--darker);
             padding: 4rem 5%;
@@ -825,7 +690,6 @@
             font-size: 1.1rem;
         }
 
-        /* Loading */
         .loading {
             text-align: center;
             padding: 6rem 2rem;
@@ -845,30 +709,10 @@
             60%, 100% { content: '...'; }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                gap: 2rem;
-            }
-
-            .timeline::before {
-                left: 0;
-            }
-
-            .timeline-content {
-                width: 100%;
-                margin-left: 3rem !important;
-            }
-
-            .timeline-dot {
-                left: 0;
-                transform: translateX(0);
-            }
-
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
-
             .section-title {
                 font-size: 3rem;
             }
@@ -891,9 +735,7 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="glitch-wrapper">
-                <h1>PRACHI PANDYA</h1>
-            </div>
+            <h1>PRACHI PANDYA</h1>
             <h2>Creative Designer × Brand Strategist × Visual Storyteller</h2>
             <p class="hero-subtitle">Transforming Ideas Into Visual Masterpieces</p>
             <div class="neon-tags">
@@ -939,65 +781,43 @@
         
         <div class="timeline">
             <div class="timeline-item">
-                <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <h3 class="company-name">Infilux AppSec</h3>
                     <p class="role">Graphic Designer | Social Media Executive | CRM</p>
                     <p class="date">Aug 2024 – Present | Remote</p>
-                    <p style="color: var(--light); margin-bottom: 1rem; font-weight: 600;">Graphic Design, LinkedIn & SEO:</p>
                     <ul class="responsibilities">
-                        <li>Design high-quality LinkedIn creatives for B2B branding, cybersecurity services, product updates, and thought-leadership content</li>
-                        <li>Develop visually consistent designs using strong typography, layout hierarchy, color systems, and brand guidelines optimized for LinkedIn</li>
-                        <li>Plan and manage LinkedIn content strategy, ensuring regular posting aligned with marketing and business goals</li>
-                        <li>Optimize LinkedIn posts using SEO-friendly captions, industry keywords, and relevant hashtags to improve organic reach and visibility</li>
-                        <li>Collaborate with marketing, sales, and technical teams to convert complex technical concepts into clear, visually engaging content</li>
-                        <li>Analyze engagement metrics such as impressions, reach, and interactions to continuously improve content and design performance</li>
-                    </ul>
-                    <p style="color: var(--light); margin: 1.5rem 0 1rem; font-weight: 600;">Customer Relationship Management:</p>
-                    <ul class="responsibilities">
-                        <li>Handle client communication, requirement understanding, and regular follow-ups</li>
-                        <li>Coordinate with internal teams to ensure smooth project execution and timely delivery</li>
-                        <li>Maintain CRM records, interaction logs, and assist with lead management and onboarding</li>
-                        <li>Support preparation of client reports and business development documentation</li>
+                        <li>Design high-quality LinkedIn creatives for B2B branding and cybersecurity services</li>
+                        <li>Develop visually consistent designs using typography, layout hierarchy, and brand guidelines</li>
+                        <li>Plan and manage LinkedIn content strategy with regular posting aligned with business goals</li>
+                        <li>Optimize posts using SEO-friendly captions and hashtags to improve organic reach</li>
                     </ul>
                 </div>
             </div>
 
             <div class="timeline-item">
-                <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <h3 class="company-name">Artrivedi</h3>
                     <p class="role">Graphic Designer, Instagram, Website & AI Creative Executive</p>
                     <p class="date">Oct 2025 – Present | Remote</p>
                     <ul class="responsibilities">
-                        <li>Design creative content for Instagram posts, stories, reels graphics, and LinkedIn posts, ensuring strong brand aesthetics and consistency</li>
-                        <li>Manage Instagram page visuals with a focus on creativity, audience engagement, and brand identity</li>
-                        <li>Create AI-generated photoshoots for products, branding, and promotional campaigns, delivering professional visuals without traditional photography</li>
-                        <li>Develop AI-based videos for social media marketing, including short promotional videos, reels-style creatives, and storytelling content</li>
-                        <li>Use AI tools to generate, enhance, and stylize images and videos aligned with brand tone and campaign objectives</li>
-                        <li>Design engaging visuals for website sections, landing pages, banners, and promotional updates</li>
-                        <li>Translate brand messaging into clean, modern designs using Figma, Canva, Adobe Photoshop, and AI creative tools</li>
-                        <li>Research emerging AI design trends and tools to continuously enhance creative output</li>
-                        <li>Collaborate with marketing and content teams to incorporate feedback and refine visuals</li>
-                        <li>Manage multiple creative and AI-based projects simultaneously while meeting deadlines</li>
+                        <li>Design creative content for Instagram posts, stories, and reels with strong brand aesthetics</li>
+                        <li>Create AI-generated photoshoots for products and branding campaigns</li>
+                        <li>Develop AI-based videos for social media marketing and storytelling content</li>
+                        <li>Design engaging visuals for website sections and landing pages</li>
                     </ul>
                 </div>
             </div>
 
             <div class="timeline-item">
-                <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <h3 class="company-name">Freelance</h3>
                     <p class="role">Graphic Designer & Social Media Handler</p>
                     <p class="date">Ongoing | Remote</p>
                     <ul class="responsibilities">
-                        <li>Provide graphic design and social media branding services to clients across various industries</li>
-                        <li>Design customized Instagram and LinkedIn creatives aligned with brand guidelines and business goals</li>
+                        <li>Provide graphic design and social media branding services across various industries</li>
+                        <li>Design customized Instagram and LinkedIn creatives aligned with brand guidelines</li>
                         <li>Create content calendars and maintain consistent posting schedules</li>
-                        <li>Develop brand identity elements including logos, color palettes, typography, and style guides</li>
-                        <li>Handle direct client communication, revisions, and final delivery</li>
-                        <li>Support startups and small businesses in building strong digital presence and brand awareness</li>
-                        <li>Stay updated with the latest design trends, tools, and platform updates</li>
+                        <li>Support startups and small businesses in building strong digital presence</li>
                     </ul>
                 </div>
             </div>
@@ -1011,10 +831,12 @@
         </div>
         
         <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">ALL PROJECTS</button>
-            <button class="filter-btn" data-filter="infilux">INFILUX</button>
-            <button class="filter-btn" data-filter="artrivedi">ARTRIVEDI</button>
+            <button class="filter-btn active" onclick="filterCategory('all')">ALL PROJECTS</button>
+            <button class="filter-btn" onclick="filterCategory('infilux')">INFILUX</button>
+            <button class="filter-btn" onclick="filterCategory('artrivedi')">ARTRIVEDI</button>
         </div>
+
+        <div id="breadcrumbNav" class="breadcrumb" style="display: none;"></div>
         
         <div class="portfolio-grid" id="portfolioGrid">
             <div class="loading">Loading Portfolio</div>
@@ -1117,7 +939,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1128,38 +949,72 @@
             });
         });
 
-        // Portfolio loading and filtering
-        let allImages = [];
-        let filteredImages = [];
+        let portfolioData = {
+            infilux: { folders: [], images: [] },
+            artrivedi: { folders: [], images: [] }
+        };
+        
+        let currentView = {
+            category: 'all',
+            subfolder: null
+        };
+        
+        let displayedImages = [];
         let currentPage = 1;
         const imagesPerPage = 12;
-        let currentFilter = 'all';
 
-        async function fetchImagesRecursively(url, category, subfolder = '') {
-            const images = [];
-            
+        async function fetchFolderStructure(url, category) {
             try {
                 const response = await fetch(url);
                 const files = await response.json();
                 
+                const folders = [];
+                const images = [];
+                
+                for (const file of files) {
+                    if (file.type === 'dir') {
+                        const subImages = await fetchImagesFromFolder(file.url);
+                        folders.push({
+                            name: file.name,
+                            url: file.url,
+                            imageCount: subImages.length,
+                            images: subImages
+                        });
+                    } else if (file.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)) {
+                        images.push({
+                            name: file.name,
+                            url: file.download_url,
+                            category: category
+                        });
+                    }
+                }
+                
+                return { folders, images };
+            } catch (error) {
+                console.error(`Error fetching from ${url}:`, error);
+                return { folders: [], images: [] };
+            }
+        }
+
+        async function fetchImagesFromFolder(url) {
+            try {
+                const response = await fetch(url);
+                const files = await response.json();
+                
+                const images = [];
                 for (const file of files) {
                     if (file.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)) {
                         images.push({
                             name: file.name,
-                            url: file.download_url,
-                            category: category,
-                            subfolder: subfolder || 'main'
+                            url: file.download_url
                         });
-                    } else if (file.type === 'dir') {
-                        const subImages = await fetchImagesRecursively(file.url, category, file.name);
-                        images.push(...subImages);
                     }
                 }
+                return images;
             } catch (error) {
-                console.error(`Error fetching from ${url}:`, error);
+                console.error(`Error fetching images from ${url}:`, error);
+                return [];
             }
-            
-            return images;
         }
 
         async function loadPortfolio() {
@@ -1168,40 +1023,121 @@
             try {
                 grid.innerHTML = '<div class="loading">Loading Portfolio</div>';
                 
-                // Load Infilux images
-                const infiluxImages = await fetchImagesRecursively(
+                const infiluxData = await fetchFolderStructure(
                     'https://api.github.com/repos/prachipandya07/Pandya_Prachi_CV/contents/Infilux',
                     'infilux'
                 );
                 
-                // Load Artrivedi images (including subfolders)
-                const artrivediImages = await fetchImagesRecursively(
+                const artrivediData = await fetchFolderStructure(
                     'https://api.github.com/repos/prachipandya07/Pandya_Prachi_CV/contents/Artrivedi',
                     'artrivedi'
                 );
                 
-                allImages = [...infiluxImages, ...artrivediImages];
+                portfolioData.infilux = infiluxData;
+                portfolioData.artrivedi = artrivediData;
                 
-                if (allImages.length === 0) {
-                    grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No portfolio images found.</p>';
-                    return;
-                }
-                
-                filteredImages = [...allImages];
-                currentPage = 1;
-                displayPage();
-                updatePagination();
+                showMainView('all');
                 
             } catch (error) {
                 console.error('Error loading portfolio:', error);
                 grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">Unable to load portfolio.</p>';
             }
         }
-        function displayPage() {
+
+        function showMainView(category) {
+            currentView.category = category;
+            currentView.subfolder = null;
+            
             const grid = document.getElementById('portfolioGrid');
+            const breadcrumb = document.getElementById('breadcrumbNav');
+            breadcrumb.style.display = 'none';
+            
+            if (category === 'all') {
+                const allFolders = [
+                    ...portfolioData.infilux.folders.map(f => ({ ...f, category: 'infilux' })),
+                    ...portfolioData.artrivedi.folders.map(f => ({ ...f, category: 'artrivedi' }))
+                ];
+                const allImages = [
+                    ...portfolioData.infilux.images,
+                    ...portfolioData.artrivedi.images
+                ];
+                
+                if (allFolders.length > 0) {
+                    displaySubfolders(allFolders);
+                } else if (allImages.length > 0) {
+                    displayedImages = allImages;
+                    currentPage = 1;
+                    displayImages();
+                } else {
+                    grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No portfolio items found.</p>';
+                }
+            } else {
+                const data = portfolioData[category];
+                
+                if (data.folders.length > 0) {
+                    displaySubfolders(data.folders.map(f => ({ ...f, category })));
+                } else if (data.images.length > 0) {
+                    displayedImages = data.images;
+                    currentPage = 1;
+                    displayImages();
+                } else {
+                    grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No portfolio items found.</p>';
+                }
+            }
+        }
+
+        function displaySubfolders(folders) {
+            const grid = document.getElementById('portfolioGrid');
+            document.getElementById('pagination').style.display = 'none';
+            
+            grid.innerHTML = '';
+            grid.className = 'subfolder-grid';
+            
+            folders.forEach(folder => {
+                const card = document.createElement('div');
+                card.className = 'subfolder-card';
+                card.onclick = () => showSubfolderImages(folder);
+                
+                card.innerHTML = `
+                    <div class="subfolder-icon">📁</div>
+                    <h3 class="subfolder-name">${folder.name}</h3>
+                    <p class="subfolder-count">${folder.imageCount} Images</p>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function showSubfolderImages(folder) {
+            currentView.subfolder = folder;
+            
+            const breadcrumb = document.getElementById('breadcrumbNav');
+            breadcrumb.style.display = 'flex';
+            
+            const categoryName = folder.category.charAt(0).toUpperCase() + folder.category.slice(1);
+            breadcrumb.innerHTML = `
+                <span class="breadcrumb-item" onclick="showMainView('${folder.category}')">${categoryName}</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item breadcrumb-current">${folder.name}</span>
+            `;
+            
+            displayedImages = folder.images.map(img => ({
+                ...img,
+                category: folder.category,
+                subfolder: folder.name
+            }));
+            
+            currentPage = 1;
+            displayImages();
+        }
+
+        function displayImages() {
+            const grid = document.getElementById('portfolioGrid');
+            grid.className = 'portfolio-grid';
+            
             const startIndex = (currentPage - 1) * imagesPerPage;
             const endIndex = startIndex + imagesPerPage;
-            const pageImages = filteredImages.slice(startIndex, endIndex);
+            const pageImages = displayedImages.slice(startIndex, endIndex);
             
             if (pageImages.length === 0) {
                 grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No images found.</p>';
@@ -1211,30 +1147,24 @@
             
             grid.innerHTML = '';
             
-            pageImages.forEach((image) => {
+            pageImages.forEach(image => {
                 const item = document.createElement('div');
                 item.className = 'portfolio-item';
-                item.setAttribute('data-category', image.category);
                 
-                const companyName =
-                    image.category === 'infilux'
-                        ? 'Infilux AppSec Project'
-                        : 'Artrivedi Project';
+                const projectName = image.subfolder || (image.category.charAt(0).toUpperCase() + image.category.slice(1));
                 
                 item.innerHTML = `
                     <img src="${image.url}" alt="${image.name}" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>${image.name.replace(/\.[^/.]+$/, '').replace(/-|_/g, ' ')}</h3>
-                        <p>${companyName}</p>
+                        <p>${projectName}</p>
                     </div>
                 `;
                 
                 grid.appendChild(item);
             });
             
-            if (currentPage > 1) {
-                document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            updatePagination();
         }
 
         function updatePagination() {
@@ -1243,7 +1173,7 @@
             const nextBtn = document.getElementById('nextBtn');
             const pageInfo = document.getElementById('pageInfo');
             
-            const totalPages = Math.ceil(filteredImages.length / imagesPerPage);
+            const totalPages = Math.ceil(displayedImages.length / imagesPerPage);
             
             if (totalPages <= 1) {
                 pagination.style.display = 'none';
@@ -1258,44 +1188,31 @@
         }
 
         function nextPage() {
-            const totalPages = Math.ceil(filteredImages.length / imagesPerPage);
+            const totalPages = Math.ceil(displayedImages.length / imagesPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
-                displayPage();
-                updatePagination();
+                displayImages();
+                document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
         function previousPage() {
             if (currentPage > 1) {
                 currentPage--;
-                displayPage();
-                updatePagination();
+                displayImages();
+                document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                currentFilter = this.getAttribute('data-filter');
-                
-                if (currentFilter === 'all') {
-                    filteredImages = [...allImages];
-                } else {
-                    filteredImages = allImages.filter(img => img.category === currentFilter);
-                }
-                
-                currentPage = 1;
-                displayPage();
-                updatePagination();
-            });
-        });
+        function filterCategory(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            showMainView(category);
+        }
 
         window.addEventListener('load', loadPortfolio);
 
-        // Navbar effect on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
