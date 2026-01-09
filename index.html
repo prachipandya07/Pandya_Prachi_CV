@@ -1044,6 +1044,16 @@
                     'freelance'
                 );
                 
+                // Add infographic_video folder to freelance
+                const infographicData = await fetchFolderStructure(
+                    'https://api.github.com/repos/prachipandya07/Pandya_Prachi_CV/contents/infographic_video',
+                    'freelance'
+                );
+                
+                // Merge infographic_video data with freelance data
+                freelanceData.folders.push(...infographicData.folders);
+                freelanceData.images.push(...infographicData.images);
+                
                 portfolioData.infilux = infiluxData;
                 portfolioData.artrivedi = artrivediData;
                 portfolioData.freelance = freelanceData;
@@ -1065,14 +1075,12 @@
             breadcrumb.style.display = 'none';
             
             if (category === 'all') {
-                // Show all subfolders from all three categories
                 const allFolders = [
                     ...portfolioData.infilux.folders.map(f => ({ ...f, category: 'infilux' })),
                     ...portfolioData.artrivedi.folders.map(f => ({ ...f, category: 'artrivedi' })),
                     ...portfolioData.freelance.folders.map(f => ({ ...f, category: 'freelance' }))
                 ];
                 
-                // Also collect root level images (images not in subfolders)
                 const allRootImages = [
                     ...portfolioData.infilux.images,
                     ...portfolioData.artrivedi.images,
@@ -1080,11 +1088,9 @@
                 ];
                 
                 if (allFolders.length > 0 || allRootImages.length > 0) {
-                    // If there are subfolders, show them
                     if (allFolders.length > 0) {
                         displaySubfolders(allFolders);
                     } else {
-                        // Only root images, no subfolders
                         displayedImages = allRootImages;
                         currentPage = 1;
                         displayImages();
@@ -1093,14 +1099,11 @@
                     grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No portfolio items found.</p>';
                 }
             } else {
-                // Single category view (Infilux, Artrivedi, or Freelance)
                 const data = portfolioData[category];
                 
                 if (data.folders.length > 0) {
-                    // Show subfolders if they exist
                     displaySubfolders(data.folders.map(f => ({ ...f, category })));
                 } else if (data.images.length > 0) {
-                    // Show root level images if no subfolders
                     displayedImages = data.images;
                     currentPage = 1;
                     displayImages();
